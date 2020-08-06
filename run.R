@@ -8,23 +8,6 @@ library(stats)
 library(factoextra)
 library(C50)
 
-#Importing training data
-train.shiny <- read.csv("passenger_survey_data_1.csv", stringsAsFactors = T)
-
-#Removing unnessary columns
-train.shiny <- train.shiny[,-(1:2)]
-
-#Replacing NA values with mean
-train.shiny$Arrival.Delay.in.Minutes <- train.shiny$Arrival.Delay.in.Minutes %>% replace_na(mean(train.shiny$Arrival.Delay.in.Minutes, na.rm = T))
-
-#Log transforming right skewed data
-for (i in c("Flight.Distance", "Departure.Delay.in.Minutes", "Arrival.Delay.in.Minutes"))
-{
-  train.shiny[,i] <- log(train.shiny[, i] + 1)
-}
-
-#Creating a Decesion Tree model using C5.0
-c50.shiny <- C5.0(x = train.shiny[,-23], y = train.shiny$satisfaction)
 
 #Subsetting mandatory fields
 fieldsMandatory <- c("Gender", "Customer.Type", "Age", "Type.of.Travel", "Class", "Flight.Distance", "Inflight.wifi.service", 

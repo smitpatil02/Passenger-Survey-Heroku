@@ -1,13 +1,18 @@
-#
-# This is the server logic of a Shiny web application. You can run the
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
 
+# This is the server logic of a Shiny web application. You can run the
+
+#Importing required libraries
 library(shiny)
+library(shinyjs)
+library(shinythemes)
+library(tidyverse)
+library(arules)
+library(stats)
+library(factoextra)
+library(C50)
+
+# Read in the RF model
+model <- readRDS("model.rds")
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
@@ -88,7 +93,7 @@ shinyServer(function(input, output, session) {
         }
         
         # Predicting the value for the test data
-        val <- predict(c50.shiny, test[,-23])
+        val <- predict(model, test[,-23])
         
         # setting the output value to character
         val <- as.character(val)
