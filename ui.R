@@ -48,8 +48,8 @@ shinyUI(fluidPage(theme = shinytheme("paper"),
                            column(2, numericInput("Arrival.Delay.in.Minutes", labelMandatory("Arrival Delay in Minutes"), value = 0, min = 0, max = 1800))),
                   br(),
                   fluidRow(column(1, actionButton("submitbutton", "Submit", class = "btn btn-primary")),
-                           column(2, textOutput("val")),
-                           column(2, verbatimTextOutput('contents'))),
+                           column(3, textOutput("val")),
+                           column(3, verbatimTextOutput('contents'))),
                   br()
 )
 )
